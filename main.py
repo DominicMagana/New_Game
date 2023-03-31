@@ -1,4 +1,4 @@
-# File created by: Chris Cozort
+# File created by: Dominic Magana
 # Agenda:
 # gIT GITHUB    
 # Build file and folder structures
@@ -6,7 +6,7 @@
 # testing github changes
 # I changed something - I changed something else tooooo!
 
-# This file was created by: Chris Cozort
+# This file was created by: Dominic Magana
 # Sources: http://kidscancode.org/blog/2016/08/pygame_1-1_getting-started/
 # Sources: 
 
