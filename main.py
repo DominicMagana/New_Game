@@ -11,6 +11,7 @@
 # Sources: 
 
 # import libs
+import pygame
 import pygame as pg
 import os
 # import settings 
@@ -23,6 +24,7 @@ game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, "img")
 
 # create game class in order to pass properties to the sprites file
+
 
 class Game:
     def __init__(self):
@@ -76,9 +78,12 @@ class Game:
                     self.player.jump()
     def update(self):
         self.all_sprites.update()
+        
+        # if the player is falling
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.platforms, False)
             if hits:
+                self.player.standing = True
                 if hits[0].variant == "disappearing":
                     hits[0].kill()
                 elif hits[0].variant == "bouncey":
@@ -87,10 +92,17 @@ class Game:
                 else:
                     self.player.pos.y = hits[0].rect.top
                     self.player.vel.y = 0
+            else:
+                self.player.standing = False
 
     def draw(self):
+        coin_img = pg.image.load("coin.jpg")
+        coin_img = pg.transform.scale(coin_img, (105, 105))
+        coin_img = (40,40)
         self.screen.fill(BLUE)
         self.all_sprites.draw(self.screen)
+        if self.player.standing:
+            self.draw_text("I hit a plat!", 24, WHITE, WIDTH/2, HEIGHT/2)
         # is this a method or a function?
         pg.display.flip()
     def draw_text(self, text, size, color, x, y):
@@ -104,8 +116,10 @@ class Game:
         x,y = pg.mouse.get_pos()
         return (x,y)
 
+
 # instantiate the game class...
 g = Game()
+
 
 # kick off the game loop
 while g.running:
