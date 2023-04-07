@@ -14,14 +14,15 @@ class Player(Sprite):
         # these are the properties
         self.game = game
         self.image = pg.Surface((50,50))
-        self.image.fill(BLACK)
+        self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
-        self.pos = vec(WIDTH/2, HEIGHT/2)
+        self.pos = vec(WIDTH/7, HEIGHT/2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.cofric = 0.1
         self.canjump = False
+        self.standing = False
     def input(self):
         keystate = pg.key.get_pressed()
         # if keystate[pg.K_w]:
@@ -41,11 +42,11 @@ class Player(Sprite):
         #         print(PAUSED)
     # ...
     def jump(self):
-        self.rect.x += 1
+        self.rect.x += 2
         hits = pg.sprite.spritecollide(self, self.game.platforms, False)
-        self.rect.x -= 1
-        # if hits:
-        self.vel.y = -PLAYER_JUMP
+        self.rect.x -= 2
+        if hits:
+            self.vel.y = -PLAYER_JUMP
     
     def inbounds(self):
         if self.rect.x > WIDTH - 50:
