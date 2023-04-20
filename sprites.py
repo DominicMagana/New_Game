@@ -14,7 +14,7 @@ class Player(Sprite):
         Sprite.__init__(self)
         # these are the properties
         self.game = game
-        self.image = pg.image.load('coin.jpg').convert_alpha()
+        self.image = pg.image.load('Mario.png').convert_alpha()
         self.image = pg.transform.scale(self.image,(50,50))
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
