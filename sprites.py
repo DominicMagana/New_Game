@@ -1,20 +1,21 @@
 import pygame as pg
+import random
 from pygame.sprite import Sprite
 from settings import *
 from random import randint
 
 
+
 vec = pg.math.Vector2
 
 # player class
-
 class Player(Sprite):
     def __init__(self, game):
         Sprite.__init__(self)
         # these are the properties
         self.game = game
-        self.image = pg.Surface((50,50))
-        self.image.fill(RED)
+        self.image = pg.image.load('coin.jpg').convert_alpha()
+        self.image = pg.transform.scale(self.image,(50,50))
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
         self.pos = vec(WIDTH/7, HEIGHT/2)
@@ -74,6 +75,8 @@ class Player(Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
         self.rect.midbottom = self.pos
+        if self.pos.x > WIDTH or self.pos.x < 0:
+            ()
 
 class Mob(Sprite):
     def __init__(self,width,height, color):
