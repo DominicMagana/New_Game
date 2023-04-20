@@ -6,12 +6,13 @@
 # testing github changes
 # I changed something - I changed something else tooooo!
 
-# This file was created by: Dominic Magana
+# This file was created by: Dominic
 # Sources: http://kidscancode.org/blog/2016/08/pygame_1-1_getting-started/
 # Sources: 
 
 # import libs
 import pygame
+import sys
 import pygame as pg
 import os
 # import settings 
@@ -23,9 +24,10 @@ from sprites import *
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, "img")
 
+
+
 # create game class in order to pass properties to the sprites file
-
-
+#
 class Game:
     def __init__(self):
         # init game window etc.
@@ -96,13 +98,10 @@ class Game:
                 self.player.standing = False
 
     def draw(self):
-        coin_img = pg.image.load("coin.jpg")
-        coin_img = pg.transform.scale(coin_img, (105, 105))
-        coin_img = (40,40)
         self.screen.fill(BLUE)
         self.all_sprites.draw(self.screen)
         if self.player.standing:
-            self.draw_text("I hit a plat!", 24, WHITE, WIDTH/2, HEIGHT/2)
+            self.draw_text("I hit a platform", 24, WHITE, WIDTH/2, HEIGHT/2)
         # is this a method or a function?
         pg.display.flip()
     def draw_text(self, text, size, color, x, y):
@@ -115,6 +114,15 @@ class Game:
     def get_mouse_now(self):
         x,y = pg.mouse.get_pos()
         return (x,y)
+    def game_over(self):
+        FONT = pg.font.Font('Arial', 60)
+        game_over_text = FONT.render("Game Over", True (200, 200, 200))
+        self.screen.fill(BLACK)
+        self.screen.blit(game_over_text, (250,250))
+        pg.display.flip()
+        pg.display.update()
+        print("Game Over")
+        
 
 
 # instantiate the game class...
@@ -124,5 +132,20 @@ g = Game()
 # kick off the game loop
 while g.running:
     g.new()
+    if self.pos.x > WIDTH or self.pos.x < 0:
+        self.game_over()
 
-pg.quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
