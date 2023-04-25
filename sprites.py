@@ -3,10 +3,12 @@ import random
 from pygame.sprite import Sprite
 from settings import *
 from random import randint
-
+from pygame.locals import *
 
 
 vec = pg.math.Vector2
+
+    
 
 # player class
 class Player(Sprite):
@@ -14,6 +16,7 @@ class Player(Sprite):
         Sprite.__init__(self)
         # these are the properties
         self.game = game
+        # This is making my character mario
         self.image = pg.image.load('Mario.png').convert_alpha()
         self.image = pg.transform.scale(self.image,(50,50))
         self.rect = self.image.get_rect()
@@ -24,6 +27,8 @@ class Player(Sprite):
         self.cofric = 0.1
         self.canjump = False
         self.standing = False
+        self.death = False
+        # Thiscode is for how you se the keys for the character and which ones move it 
     def input(self):
         keystate = pg.key.get_pressed()
         # if keystate[pg.K_w]:
@@ -41,7 +46,7 @@ class Player(Sprite):
         #     else:
         #         PAUSED = False
         #         print(PAUSED)
-    # ...
+    # This is my jump code, so it enables how high my character jumps
     def jump(self):
         self.rect.x += 2
         hits = pg.sprite.spritecollide(self, self.game.platforms, False)
@@ -49,25 +54,26 @@ class Player(Sprite):
         if hits:
             self.vel.y = -PLAYER_JUMP
     
-    def inbounds(self):
-        if self.rect.x > WIDTH - 50:
-            self.pos.x = WIDTH - 25
-            self.vel.x = 0
-            print("i am off the right side of the screen...")
-        if self.rect.x < 0:
-            self.pos.x = 25
-            self.vel.x = 0
-            print("i am off the left side of the screen...")
-        if self.rect.y > HEIGHT:
-            print("i am off the bottom of the screen")
-        if self.rect.y < 0:
-            print("i am off the top of the screen...")
-    def mob_collide(self):
-            hits = pg.sprite.spritecollide(self, self.game.enemies, True)
-            if hits:
-                print("you collided with an enemy...")
-                self.game.score += 1
-                print(SCORE)
+    # def inbounds(self):
+    #     if self.rect.x > WIDTH - 50:
+    #         self.pos.x = WIDTH - 25
+    #         self.vel.x = 0
+    #         print("i am off the right side of the screen...")
+    #     if self.rect.x < 0:
+    #         self.pos.x = 25
+    #         self.vel.x = 0
+    #         print("i am off the left side of the screen...")
+    #     if self.rect.y > HEIGHT:
+    #         print("i am off the bottom of the screen")
+    #     if self.rect.y < 0:
+    #         print("i am off the top of the screen...")
+    # def mob_collide(self):
+    #         hits = pg.sprite.spritecollide(self, self.game.enemies, True)
+    #         if hits:
+    #             print("you collided with an enemy...")
+    #             self.game.score += 1
+    #             print(SCORE)
+    # 
     def update(self):
         self.acc = vec(0, PLAYER_GRAV)
         self.acc.x = self.vel.x * PLAYER_FRICTION
@@ -78,6 +84,7 @@ class Player(Sprite):
         if self.pos.x > WIDTH or self.pos.x < 0:
             ()
 
+# This is for my little blocks 
 class Mob(Sprite):
     def __init__(self,width,height, color):
         Sprite.__init__(self)
@@ -93,6 +100,7 @@ class Mob(Sprite):
         self.acc = vec(1,1)
         self.cofric = 0.01
     # ...
+    # My in bounds code for my boundries
     def inbounds(self):
         if self.rect.x > WIDTH:
             self.vel.x *= -1
@@ -115,6 +123,7 @@ class Mob(Sprite):
 
 # create a new platform class...
 
+# My platform sprites which determines my height, width, color, and image
 class Platform(Sprite):
     def __init__(self, x, y, width, height, color, variant):
         Sprite.__init__(self)
