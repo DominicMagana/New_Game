@@ -7,7 +7,7 @@
 # I changed it so that now I have a game over feature when you go off to the sides
 
 # This file was created by: Dominic Magana
-# Sources: http://kidscancode.org/blog/2016/08/pygame_1-1_getting-started/
+# Sources: http://kidscancode.org/blog/2016/08/pygame_1-1_getting-started/, https://www.youtube.com/watch?v=yRkyrOWmSl4
 # Sources: 
 # goals:I want to create a game over feature
 # rules:
